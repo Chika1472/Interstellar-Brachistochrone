@@ -1,0 +1,267 @@
+:root {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #f8f9fc;
+    background-color: #0d101a;
+    --slider-accent: #2c7efc;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 2.5rem 1.75rem 3.5rem;
+    display: grid;
+    gap: 1.75rem;
+}
+
+header h1 {
+    margin-bottom: 0.3rem;
+    font-size: 2.25rem;
+}
+
+header p {
+    color: #9aa3b7;
+    line-height: 1.5;
+}
+
+.card {
+    background: #181d2d;
+    border-radius: 14px;
+    padding: 1.75rem;
+    box-shadow: 0 12px 36px rgba(4, 6, 11, 0.5);
+}
+
+.metrics-card h2 {
+    margin: 0 0 1rem;
+    font-size: 1.55rem;
+}
+
+.highlight-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.highlight-block {
+    background: linear-gradient(135deg, rgba(44, 126, 252, 0.15), rgba(109, 93, 252, 0.2));
+    border: 1px solid rgba(86, 115, 255, 0.35);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.highlight-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #c4cbff;
+}
+
+.highlight-value {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.workspace {
+    display: grid;
+    gap: 1.75rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    align-items: stretch;
+}
+
+.form-card {
+    display: grid;
+    gap: 1.4rem;
+}
+
+form {
+    display: grid;
+    gap: 1.4rem;
+}
+
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+label {
+    font-weight: 600;
+}
+
+input,
+select {
+    padding: 0.8rem 0.95rem;
+    border-radius: 9px;
+    border: 1px solid #303b52;
+    background: #111627;
+    color: inherit;
+    font-size: 1rem;
+}
+
+input[type="range"] {
+    width: 100%;
+    padding: 0;
+    background: transparent;
+    accent-color: var(--slider-accent);
+}
+
+.range-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.range-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #6e7890;
+}
+
+.advanced-toggle {
+    margin-top: 0.6rem;
+}
+
+.advanced-grid {
+    display: grid;
+    gap: 1rem;
+    margin-top: 0.9rem;
+}
+
+.input-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+
+.detail-list,
+.fuel-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.detail-list li,
+.fuel-list li {
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.detail-list li:last-child,
+.fuel-list li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.hint {
+    color: #6e7890;
+    font-size: 0.92rem;
+}
+
+.hint.warning {
+    font-weight: 600;
+}
+
+.mass-range .range-labels {
+    justify-content: space-between;
+}
+
+.form-message {
+    min-height: 1.3rem;
+    margin: 0;
+    font-size: 0.95rem;
+    color: #9aa3b7;
+}
+
+.form-message.error {
+    color: #ff7676;
+    font-weight: 600;
+}
+
+.journey-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.journey-card h3 {
+    margin: 0;
+    font-size: 1.35rem;
+    color: #c4c9d8;
+}
+
+.fuel-card h3 {
+    margin: 0 0 1rem;
+    font-size: 1.35rem;
+    color: #ffc58f;
+}
+
+@media (min-width: 560px) {
+    .advanced-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 720px) {
+    .highlight-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .highlight-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 900px) {
+    .workspace {
+        grid-template-columns: minmax(340px, 1fr) minmax(400px, 1.3fr);
+    }
+}
+
+@media (max-width: 720px) {
+    .container {
+        padding: 2rem 1.5rem 3rem;
+        gap: 1.5rem;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+}
+
+.mass-range-input {
+    accent-color: #3a9cfc;
+}
+
+.warning-area {
+    min-height: 3.2rem;
+    display: grid;
+    gap: 0.4rem;
+}
+
+.warning-text {
+    min-height: 1.4rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #f1a355;
+    margin: 0;
+}
+
+.warning-text.error {
+    color: #ff7676;
+}
+

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interstellar Brachistochrone Planner</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <main class="container">
+        <header>
+            <h1>Interstellar Brachistochrone</h1>
+            <p>Explore relativistic, constant proper-acceleration transfers across the solar neighborhood and deep space. Calculations run entirely in your browser.</p>
+        </header>
+
+        <section class="card metrics-card" id="missionMetrics">
+            <h2>Mission Metrics</h2>
+            <div class="highlight-grid">
+                <div class="highlight-block">
+                    <p class="highlight-label">Ship-frame duration</p>
+                    <p class="highlight-value" id="highlightShipDuration">--</p>
+                </div>
+                <div class="highlight-block">
+                    <p class="highlight-label">Earth-frame duration</p>
+                    <p class="highlight-value" id="highlightEarthDuration">--</p>
+                </div>
+                <div class="highlight-block">
+                    <p class="highlight-label">Maximum speed</p>
+                    <p class="highlight-value" id="highlightSpeed">--</p>
+                </div>
+                <div class="highlight-block">
+                    <p class="highlight-label">Rapidity budget (c*A)</p>
+                    <p class="highlight-value" id="highlightRapidity">--</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="workspace">
+            <div class="card form-card">
+                <form id="trajectory-form">
+                    <div class="field-group">
+                        <label for="origin">Origin</label>
+                        <select id="origin" name="origin" required></select>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="destination">Destination</label>
+                        <select id="destination" name="destination" required></select>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="dryMassRange">Dry mass</label>
+                        <div class="range-wrapper mass-range">
+                            <input id="dryMassRange" class="mass-range-input" name="dryMassRange" type="range" min="0" max="9" step="1" value="3" />
+                            <div class="range-labels">
+                                <span>1 t</span>
+                                <span>1,000,000,000 t</span>
+                            </div>
+                        </div>
+                        <p class="hint" id="dryMassDisplay">--</p>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="accelerationRange">Acceleration</label>
+                        <div class="range-wrapper">
+                            <input id="accelerationRange" name="accelerationRange" type="range" min="0.1" max="10" step="0.1" value="1" />
+                            <div class="range-labels">
+                                <span>0.1 g</span>
+                                <span>10 g</span>
+                            </div>
+                        </div>
+                        <p class="hint" id="accelerationDisplay">&nbsp;</p>
+
+                        <details class="advanced-toggle">
+                            <summary>Manual</summary>
+                            <div class="advanced-grid">
+                                <div class="input-block">
+                                    <label for="accelerationManual">Manual acceleration (m/s^2)</label>
+                                    <input id="accelerationManual" name="accelerationManual" type="number" min="0.001" step="0.01" placeholder="Overrides the slider" aria-label="Manual acceleration value" />
+                                </div>
+                                <div class="input-block">
+                                    <label for="dryMassManual">Manual dry mass (t)</label>
+                                    <input id="dryMassManual" name="dryMassManual" type="number" min="0.001" step="0.001" placeholder="Overrides the slider" aria-label="Manual dry mass in tons" />
+                                </div>
+                                <div class="input-block">
+                                    <label for="distanceOverride">Override distance (km)</label>
+                                    <input id="distanceOverride" name="distanceOverride" type="number" min="1" step="1" placeholder="Optional" />
+                                </div>
+                                <p class="hint">Provide custom acceleration, mass, or distance values if the presets do not match your mission.</p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <p class="form-message" id="formMessage"></p>
+                    <div class="warning-area">
+                        <p class="warning-text" id="accelerationWarning"></p>
+                        <p class="warning-text" id="massWarning"></p>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card journey-card" id="journeyCard">
+                <h3>Journey Details</h3>
+                <ul class="detail-list">
+                    <li><strong>Acceleration:</strong> <span id="detailAcceleration">--</span></li>
+                    <li><strong>Halfway burn (ship frame):</strong> <span id="detailHalfShip">--</span></li>
+                    <li><strong>Halfway burn (Earth frame):</strong> <span id="detailHalfEarth">--</span></li>
+                    <li><strong>Distance:</strong> <span id="detailDistance">--</span></li>
+                    <li><strong>Time dilation (gamma):</strong> <span id="detailGamma">--</span></li>
+                    <li><strong>Peak velocity:</strong> <span id="detailPeakVelocity">--</span></li>
+                    <li><strong>Rapidity per leg (c*A):</strong> <span id="detailRapidityPerLeg">--</span></li>
+                    <li><strong>Total ship mass:</strong> <span id="detailTotalMass">--</span></li>
+                    <li><strong>Fuel mass consumed:</strong> <span id="detailFuelMass">--</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="card fuel-card" id="fuelCard">
+            <h3>Fuel Energy Comparisons</h3>
+            <ul class="fuel-list">
+                <li><strong>Total fuel energy:</strong> <span id="fuelEnergy">--</span></li>
+                <li><strong>Equivalent chemical propellant:</strong> <span id="fuelChemical">--</span></li>
+                <li><strong>Hiroshima yields:</strong> <span id="fuelHiroshima">--</span></li>
+                <li><strong>Global energy use (years):</strong> <span id="fuelWorld">--</span></li>
+                <li><strong>Solar Dyson sphere time:</strong> <span id="fuelDyson">--</span></li>
+            </ul>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
