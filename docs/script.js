@@ -509,8 +509,23 @@ function computeTrajectory() {
     const cTimesRapidityPerLeg = SPEED_OF_LIGHT * rapidityPerLeg;
     const cTimesRapidityTotal = SPEED_OF_LIGHT * rapidityTotal;
 
-    const dryMassOption = MASS_OPTIONS[Number(dryMassRange.value)] ?? MASS_OPTIONS[0];
-    const dryMassKg = dryMassOption.tons * TON_IN_KG;
+    let dryMassKg;
+    const dryMassManualRaw = dryMassManual.value.trim();
+    if (dryMassManualRaw) {
+        const manualTons = Number(dryMassManualRaw);
+        if (!Number.isFinite(manualTons) || manualTons <= 0) {
+            const message = "Manual dry mass must be a positive number.";
+            setMassWarning(message, "#ff5d5d");
+            showFormMessage(message, true);
+            resetResults();
+            return;
+        }
+        setMassWarning("");
+        dryMassKg = manualTons * TON_IN_KG;
+    } else {
+        const dryMassOption = MASS_OPTIONS[Number(dryMassRange.value)] ?? MASS_OPTIONS[0];
+        dryMassKg = dryMassOption.tons * TON_IN_KG;
+    }
     const massRatioHalf = Math.exp(rapidityPerLeg);
     const massRatioTotal = Math.exp(rapidityTotal);
     const totalMassKg = dryMassKg * massRatioTotal;
